@@ -26,6 +26,10 @@ class Type {
   strongAgainst() {
     return TYPES_DATA[this.type].strengths.map(type => TypesFactory.find(type))
   }
+
+  id() {
+    return this.type;
+  }
 }
 
 
