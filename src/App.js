@@ -1,42 +1,50 @@
-import React, { useEffect } from 'react';
-import TypesFactory from './types'
-import './App.css'
-
-const Grid = () => (
-  <div className="wrapper">
-    {
-      TypesFactory.types().map(type => type.component())
-    }
-  </div>
-);
-
-const TableOfWeakness = () => (
-  <table style={{ width: "100%" }}>
-    <tbody>
-      <tr>
-        <th>Type</th>
-        <th>Strengths</th>
-        <th>Weakness</th>
-        <th>Immunes</th>
-      </tr>
-      {
-        TypesFactory.types().map(type => (
-          <tr style={{ textAlign: 'center' }} key={type.id()}>
-            <td>{type.component()}</td>
-            <td>{type.strongAgainst().map(strongType => strongType.component())}</td>
-            <td>{type.weakAgainst().map(weakType => weakType.component())}</td>
-            <td>{type.immuneAgainst().map(immuneType => immuneType.component())}</td>
-        </tr>
-        ))
-      }
-    </tbody>
-  </table>
-)
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import TypesFactory from './types';
+// import MyGraph from './Graph';
+import Grid from './Grid';
+import Table from './Table';
+import './App.css';
 
 const App = () => (
-  // <Grid />
-  <TableOfWeakness />
-  // <Graph />
+  <Router>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/grid">Grid</Link>
+        </li>
+        <li>
+          <Link to="/table">Weakness/Strength Table</Link>
+        </li>
+        <li>
+          <Link to="/my-graph">D3 Graph</Link>
+        </li>
+      </ul>
+    </nav>
+    <Switch>
+    <Route path="/grid">
+      <Grid />
+    </Route>
+    <Route path="/table">
+      <Table />
+    </Route>
+    <Route path="/my-graph">
+      {/* <MyGraph
+        height="900"
+        width="1900"
+        linkDistance={200}
+        forceStrength={-2000}
+        links={links}
+        nodes={nodes}
+      /> */}
+      </Route>
+    </Switch>
+  </Router>
 )
 
 

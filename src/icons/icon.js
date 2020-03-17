@@ -46,17 +46,19 @@ const types = {
 const propTypes = {
   height: PropTypes.number,
   width: PropTypes.number,
+  isFocused: PropTypes.bool,
 }
 
 const defaultProps = {
   height: 100,
   width: 100,
+  isFocused: false,
 }
 
-const Icon = ({ type, height, width }) => {
+const Icon = ({ type, height, width, isFocused, ...customProps }) => {
   return (
-    <div className={`icon ${type}`} style={{ height: `${height}px`, width:`${width}px` }}>
-      <img src={ types[type] }/>
+    <div className={`icon ${type} ${isFocused ? 'focused' : '' }`} style={{ height: `${height}px`, width:`${width}px` }}>
+      <img src={types[type]} {...customProps} />
     </div>
   )
 };
